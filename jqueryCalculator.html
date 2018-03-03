@@ -68,10 +68,51 @@
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
-            // Your code here...
-            
+
+    $(document).ready(function(){
+
+        // 1. set up the variables
+        var firstNumber = "";
+        var secondNumber = "";
+        var operator = "";
+        var operatorClicked = false;
+        var result;
+        var operators = {
+            plus: "+",
+            minus: "-",
+            multiply: "x",
+            divide: "%"
+        }
+
+        // 2. set up the stage whether the operator is clicked or not
+        $('.number').on('click', function(){ 
+            // 1. if first no and operator is clicked 
+            if (!operatorClicked) {
+                firstNumber = firstNumber + this.value; 
+                $('#first-number').text(firstNumber);
+                // console.log(firstNumber)
+            } else {
+                secondNumber = secondNumber + this.value;
+                $('#second-number').text(secondNumber);
+
+            };
         });
+
+        // 3. when operator is clicked make operator clicked to true
+        $('.operator').on('click', function () {
+                operatorClicked = true;
+                operator = operators[this.value]
+                $('#operator').text(operator)
+                // console.log(operators[this.value])
+        })
+
+        // 4. result part
+        $('.equal').on('click', function(){
+            result = eval(firstNumber + operator + secondNumber)
+            $('#result').text(result)
+        })
+
+    });
     </script>
 </body>
 
